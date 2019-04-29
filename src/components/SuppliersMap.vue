@@ -1,21 +1,21 @@
 <template>
-    <div class="suppliers">
-        <h1>Liste des fournisseurs</h1>
-        <button type="button" @click="onSuppliersListClick">
-            Click here!
+    <div class="map">
+        <h1>Carte des fournisseurs</h1>
+        <button type="button" @click="onMapClick">
+            Click to see it!<br>
         </button>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'SuppliersList',
+        name: 'SuppliersMap',
         props: {
             msg: String
         },
         methods: {
-            onSuppliersListClick(){
-                window.alert("alert ça marche!")
+            onMapClick(){
+                window.alert("alert click on it!")
             }
         }
     }
