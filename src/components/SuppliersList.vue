@@ -4,20 +4,28 @@
         <button type="button" class="btn btn-success mr-1" @click="onSuppliersListClick">
             Click here!
         </button>
+        <Supplier :name="name" :status="status" :checkedAt="checkedAt.toLocaleString()"></Supplier>
+
     </div>
 </template>
 
 <script>
+    import Supplier from "./Supplier";
     export default {
         name: 'SuppliersList',
-        props: {
-            msg: String
-        },
+        components: {Supplier},
         methods: {
             onSuppliersListClick(){
                 window.alert("alert ça marche!")
             }
-        }
+        },
+        data: function () {
+            return {
+                name: 'Mon fournisseur',
+                status: false, // est ce qu'il y a du stock
+                checkedAt: new Date() // date de la dernière mise à jour du stock
+            }
+        },
     }
 </script>
 
