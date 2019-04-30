@@ -1,6 +1,6 @@
 <template>
     <div id="supplier"  class="border border-dark mb-3">
-        <h1>Fournisseur {{name}}</h1>
+        <h1>Fournisseur : {{name}}</h1>
         <h3 v-if="status" style="color:green">A du stock ? oui</h3>
         <h3 v-else style="color:red">A du stock ? non</h3>
         <br><br>
@@ -14,7 +14,7 @@
         props: {
             name: String,
             status: Boolean,
-            checkedAt: String
+            checkedAt: Date
         }
     }
 

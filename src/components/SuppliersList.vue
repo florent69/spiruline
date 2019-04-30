@@ -2,7 +2,7 @@
     <div class="suppliers">
         <h1>Liste des fournisseurs</h1>
         <br>
-        <Supplier v-for="supplier in suppliers" :name="supplier.name" :status="supplier.status" :checkedAt="supplier.checkedAt.toLocaleString()">
+        <Supplier v-for="supplier in suppliers" :name="supplier.name" :status="supplier.status" :checkedAt="supplier.checkedAt">
         </Supplier>
 
     </div>
@@ -10,6 +10,7 @@
 
 <script>
     import Supplier from "./Supplier";
+    import { format } from 'timeago.js';
     export default {
         name: 'SuppliersList',
         components: {Supplier},
@@ -19,15 +20,15 @@
                 suppliers: [
                     {
                         id: 1,
-                        name: "Fournisseur 1 ?",
+                        name: "Jojo la pillule",
                         status: true,
-                        checkedAt: new Date()
+                        checkedAt: format( Date())
                     },
                     {
                         id: 2,
-                        name: "Fournisseur 2",
+                        name: "JC le sniffeur",
                         status: false,
-                        checkedAt: new Date()
+                        checkedAt: format('2018-12-12')
                     }
                 ]
             }
