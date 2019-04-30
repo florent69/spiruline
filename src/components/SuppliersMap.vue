@@ -1,8 +1,8 @@
 <template>
     <div class="map">
         <h1>Carte des fournisseurs</h1>
-        <button type="button" @click="onMapClick">
-            Click to see it!<br>
+        <button type="button" class="btn btn-success mr-1" @click="onMapClick">
+            Click to see it!
         </button>
     </div>
 </template>

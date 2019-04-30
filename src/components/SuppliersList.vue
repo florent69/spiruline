@@ -1,7 +1,7 @@
 <template>
     <div class="suppliers">
         <h1>Liste des fournisseurs</h1>
-        <button type="button" @click="onSuppliersListClick">
+        <button type="button" class="btn btn-success mr-1" @click="onSuppliersListClick">
             Click here!
         </button>
     </div>
