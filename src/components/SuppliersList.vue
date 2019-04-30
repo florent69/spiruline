@@ -1,10 +1,9 @@
 <template>
     <div class="suppliers">
         <h1>Liste des fournisseurs</h1>
-        <button type="button" class="btn btn-success mr-1" @click="onSuppliersListClick">
-            Click here!
-        </button>
-        <Supplier :name="name" :status="status" :checkedAt="checkedAt.toLocaleString()"></Supplier>
+        <br>
+        <Supplier v-for="supplier in suppliers" :name="supplier.name" :status="supplier.status" :checkedAt="supplier.checkedAt.toLocaleString()">
+        </Supplier>
 
     </div>
 </template>
@@ -14,19 +13,27 @@
     export default {
         name: 'SuppliersList',
         components: {Supplier},
-        methods: {
-            onSuppliersListClick(){
-                window.alert("alert ça marche!")
-            }
-        },
+
         data: function () {
             return {
-                name: 'Mon fournisseur',
-                status: false, // est ce qu'il y a du stock
-                checkedAt: new Date() // date de la dernière mise à jour du stock
+                suppliers: [
+                    {
+                        id: 1,
+                        name: "Fournisseur 1 ?",
+                        status: true,
+                        checkedAt: new Date()
+                    },
+                    {
+                        id: 2,
+                        name: "Fournisseur 2",
+                        status: false,
+                        checkedAt: new Date()
+                    }
+                ]
             }
-        },
+        }
     }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
