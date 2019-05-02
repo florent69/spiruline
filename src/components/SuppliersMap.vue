@@ -3,15 +3,27 @@
         <h1>Carte des fournisseurs</h1>
         <GmapMap
                 :center="{lat:45.763420, lng:4.834277}"
-                :zoom="12"
+                :zoom="7"
                 map-type-id="terrain"
-                style="width:500px; height:300px"
+                style="width: 800px; height: 500px"
                 class="mx-auto"
-        ></GmapMap>
+        >
+            <GmapMarker
+                    :key="id"
+                    v-for="(supplier, id) in suppliers"
+                    :position="{lat: supplier.latitude, lng: supplier.longitude}"
+                    :clickable="true"
+                    :draggable="true"
+                    @click="center={lat: supplier.latitude, lng: supplier.longitude}"
+            />
+        </GmapMap>
     </div>
 </template>
 
+
+
 <script>
+
     export default {
         name: 'SuppliersMap',
         props: {
@@ -20,6 +32,24 @@
         methods: {
             onMapClick(){
                 window.alert("alert click on it!")
+            }
+        },
+        data: function () {
+            return {
+                suppliers: [
+                    {
+                        id: 1,
+                        latitude: 45.763420,
+                        longitude: 5
+
+                    },
+                    {
+                        id: 2,
+                        latitude: 45.763420,
+                        longitude: 4.6
+
+                    }
+                ]
             }
         }
     }
