@@ -1,9 +1,13 @@
 <template>
     <div class="map">
         <h1>Carte des fournisseurs</h1>
-        <button type="button" class="btn btn-success mr-1" @click="onMapClick">
-            Click to see it!
-        </button>
+        <GmapMap
+                :center="{lat:45.763420, lng:4.834277}"
+                :zoom="12"
+                map-type-id="terrain"
+                style="width:500px; height:300px"
+                class="mx-auto"
+        ></GmapMap>
     </div>
 </template>
 
