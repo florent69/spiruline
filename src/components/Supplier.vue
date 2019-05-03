@@ -1,10 +1,10 @@
 <template>
     <div id="supplier"  class="border border-dark mb-3">
         <h1>Fournisseur : {{name}}</h1>
-        <h3 v-if="status" style="color:green">A du stock ? oui</h3>
+        <h3 v-if="status" class="text-success">A du stock ? oui</h3>
         <h3 v-else style="color:red">A du stock ? non</h3>
         <br><br>
-        <h5>Date de dernière relevé des stocks : {{checkedAt.toLocaleString()}}</h5>
+        <h5>Date de dernière relevé des stocks : {{checkedAt}}</h5>
     </div>
 </template>
 
@@ -14,7 +14,7 @@
         props: {
             name: String,
             status: Boolean,
-            checkedAt: Date
+            checkedAt: String
         }
     }
 
@@ -25,15 +25,5 @@
     h3 {
         margin: 40px 0 0;
     }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-    a {
-        color: #42b983;
-    }
+
 </style>
