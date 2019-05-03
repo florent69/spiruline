@@ -27,14 +27,18 @@
             return {
                 suppliers: [], // au début la liste des fournisseurs est vide
                 loading: false,
-                error: null,
+                error: false,
             }
         },
         mounted () {
             axios
                 .get('https://api-suppliers.herokuapp.com/api/suppliers')
-                .then(response => (this.suppliers = response.data))
-
+                .then(response => (this.suppliers = response.data,
+            console.log(response.data)))
+                .catch(error => {
+                    this.error = true
+                })
+                .finally(() => this.loading = false)
         }
 
     }

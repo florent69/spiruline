@@ -1,20 +1,25 @@
 <template>
     <div class="map">
         <h1>Carte des fournisseurs</h1>
+        <br>
+        <div id="requestLoading">
+            <p v-if="loading">Requête en cours</p>
+            <p v-else-if="error" class="text-danger">Erreur de chargement </p>
+        </div>
+
         <GmapMap
                 :center="{lat:45.763420, lng:4.834277}"
-                :zoom="7"
+                :zoom="2"
                 map-type-id="terrain"
                 style="width: 800px; height: 500px"
                 class="mx-auto"
         >
             <GmapMarker
-                    :key="id"
-                    v-for="(supplier, id) in suppliers"
-                    :position="{lat: supplier.latitude, lng: supplier.longitude}"
+                    v-for="supplier in suppliers"
+                    :position="{lat: parseFloat(supplier.latitude), lng: parseFloat(supplier.longitude)}"
                     :clickable="true"
                     :draggable="true"
-                    @click="center={lat: supplier.latitude, lng: supplier.longitude}"
+                    @click="center={lat: parseFloat(supplier.latitude), lng: parseFloat(supplier.longitude)}"
             />
         </GmapMap>
     </div>
@@ -23,39 +28,32 @@
 
 
 <script>
-
+    import axios from "axios";
     export default {
         name: 'SuppliersMap',
-        props: {
-            msg: String
-        },
-        methods: {
-            onMapClick(){
-                window.alert("alert click on it!")
-            }
-        },
+
         data: function () {
             return {
-                suppliers: [
-                    {
-                        id: 1,
-                        latitude: 45.763420,
-                        longitude: 5
-
-                    },
-                    {
-                        id: 2,
-                        latitude: 45.763420,
-                        longitude: 4.6
-
-                    }
-                ]
+                suppliers: [], // au début la liste des fournisseurs est vide
+                loading: false,
+                error: null,
             }
+        },
+        mounted () {
+            axios
+                .get('https://api-suppliers.herokuapp.com/api/suppliers')
+                .then(response => (this.suppliers = response.data))
+                .catch(error => {
+                    this.error = true
+                })
+                .finally(() => this.loading = false)
         }
     }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+    #requestLoading {
+        font-size:xx-large;
+    }
 </style>
