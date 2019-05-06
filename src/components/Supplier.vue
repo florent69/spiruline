@@ -1,5 +1,5 @@
 <template>
-    <div id="supplier"  class="border border-dark mb-3">
+    <div class="border border-dark mb-3">
         <h1>Fournisseur : {{name}}</h1>
         <h3 v-if="status" class="text-success">A du stock ? oui</h3>
         <h3 v-else style="color:red">A du stock ? non</h3>

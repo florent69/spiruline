@@ -1,5 +1,5 @@
 <template>
-    <div class="map">
+    <div>
         <h1>Carte des fournisseurs</h1>
         <br>
         <div id="requestLoading">
@@ -39,7 +39,7 @@
                 error: null,
             }
         },
-        mounted () {
+        created () {
             axios
                 .get('https://api-suppliers.herokuapp.com/api/suppliers')
                 .then(response => (this.suppliers = response.data))

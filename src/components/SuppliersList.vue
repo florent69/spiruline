@@ -30,11 +30,10 @@
                 error: false,
             }
         },
-        mounted () {
+        created () {
             axios
                 .get('https://api-suppliers.herokuapp.com/api/suppliers')
-                .then(response => (this.suppliers = response.data,
-            console.log(response.data)))
+                .then(response => (this.suppliers = response.data))
                 .catch(error => {
                     this.error = true
                 })
