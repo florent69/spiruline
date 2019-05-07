@@ -21,6 +21,10 @@ const store = new Vuex.Store({
     suppliers: [],
     loading: false,
     error: false,
+      currentLocation: {
+          lat: 46,
+          lng: 7
+      },
   },
   actions: {
     suppliersLoading: context => {
@@ -36,7 +40,29 @@ const store = new Vuex.Store({
           })
           .finally(() => context.state.loading = false)
     },
-  }
+          geolocation : context => {
+              navigator.geolocation.getCurrentPosition((position) => {
+                  context.state.currentLocation = {
+                      lat: parseFloat(position.coords.latitude),
+                      lng: parseFloat(position.coords.longitude)
+              }
+          })
+    }
+
+      },
+
+getters: {
+    suppliers: state => state.suppliers,
+    loading: state => state.loading,
+    error: state => state.error,
+    currentLocation: state => state.currentLocation,
+},
+    mutations: {
+        SET_CURRENT_LOCATION: (state, position) => {
+            state.currentLocation = position;
+        },
+    },
+
 
 });
 

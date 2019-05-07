@@ -8,9 +8,9 @@
         </div>
 
         <GmapMap
-                :center="{lat:45.763420, lng:4.834277}"
-                :zoom="2"
-                map-type-id="terrain"
+                :center="currentLocation"
+                :zoom="16"
+                map-type-id="roadmap"
                 style="width: 800px; height: 500px"
                 class="mx-auto mb-5"
         >
@@ -27,23 +27,28 @@
 
 <script>
     import { mapActions } from "vuex";
-    import { mapState } from 'vuex'
+    import { mapGetters } from 'vuex'
 
     export default {
         name: 'SuppliersMap',
         computed: {
-            ...mapState([
+            ...mapGetters([
                 'suppliers',
                 'loading',
-                'error'
+                'error',
+                'currentLocation'
             ])
         },
         methods: {
-            ...mapActions(['suppliersLoading'])
+            ...mapActions(['suppliersLoading', 'geolocation'])
         },
-        mounted() {
+        created() {
             this.$store.dispatch('suppliersLoading')
+        },
+        mounted : function() {
+            this.geolocation();
         }
+
     }
 
 </script>
