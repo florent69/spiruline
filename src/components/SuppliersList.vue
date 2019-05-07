@@ -6,41 +6,39 @@
         <p v-if="loading">Requête en cours</p>
         <p v-else-if="error" class="text-danger">Erreur de chargement </p>
         </div>
-
-        <Supplier v-for="supplier in suppliers"
+        <supplier v-for="supplier in suppliers"
                   :name="supplier.name"
                   :status="supplier.status"
                   :checkedAt="supplier.checkedAt">
-        </Supplier>
+        </supplier>
 
     </div>
 </template>
 
 <script>
     import Supplier from "./Supplier";
-    import axios from "axios";
+    import { mapActions } from "vuex";
+    import { mapState } from 'vuex'
+
+
     export default {
         name: 'SuppliersList',
         components: {Supplier},
-
-        data: function () {
-            return {
-                suppliers: [], // au début la liste des fournisseurs est vide
-                loading: false,
-                error: false,
-            }
+        computed: {
+            ...mapState([
+                'suppliers',
+                'loading',
+                'error'
+            ])
         },
-        created () {
-            axios
-                .get('https://api-suppliers.herokuapp.com/api/suppliers')
-                .then(response => (this.suppliers = response.data))
-                .catch(error => {
-                    this.error = true
-                })
-                .finally(() => this.loading = false)
+        methods: {
+            ...mapActions(['suppliersLoading'])
+        },
+        mounted() {
+            this.$store.dispatch('suppliersLoading')
         }
-
     }
+
 
 </script>
 
